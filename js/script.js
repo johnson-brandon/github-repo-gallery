@@ -1,6 +1,8 @@
 const profileOverview=document.querySelector("div.overview");
 const username="johnson-brandon";
 const repoList=document.querySelector("ul.repo-list");
+const repoInfoContainer=document.querySelector(".repos");
+const repoData=document.querySelector(".repo-data");
 
 // Collects user info from GitHub
 const getData=async function () {
@@ -49,4 +51,19 @@ const displayRepos = function (repos) {
         repoItem.innerHTML = `<h3>${repo.name}</h3>`;
         repoList.append(repoItem);
     }
+};
+
+repoList.addEventListener("click", function (e) {
+    if (e.target.matches("h3")) {
+        const repoName = e.target.innerText;
+       getRepoInfo(repoName);
+    }
+});
+
+const getRepoInfo = async function (repoName) {
+    const fetchRepoInfo = await fetch (
+        `https://api.github.com/repos/${username}/${repoName}`
+    );
+    const repoInfo = await fetchRepoInfo.json();
+    console.log(repoInfo);
 }
