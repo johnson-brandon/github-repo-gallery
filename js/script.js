@@ -110,6 +110,7 @@ viewAllReposButton.addEventListener("click", function () {
     viewAllReposButton.classList.add("hide");
 });
 
+// Add dynamic search function
 filterInput.addEventListener("input", function (e) {
     const searchText = e.target.value;
     console.log(searchText);
